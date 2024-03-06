@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:App.Presentations.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="vm:SimulationViewModel"
+             x:Class="App.Presentations.Views.SimulationView"
+             Title="Simulação Movimento Browniano">
+    <Grid Margin="40">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="220"/>
+        </Grid.ColumnDefinitions>
+        <VerticalStackLayout Grid.Column="0">
+
+        </VerticalStackLayout>
+        <Frame Grid.Column="1" WidthRequest="200" HeightRequest="460" Margin="20,0,0,0">
+            <VerticalStackLayout>
+                <Label Text="Preço Inicial" VerticalOptions="Center" Margin="0,0,0,10"/>
+                <Entry HorizontalOptions="Start" WidthRequest="160" Margin="0,0,0,10" Text="{Binding InitialPriceString}">
+                    <Entry.Behaviors>
+                        <toolkit:NumericValidationBehavior 
+                            Flags="ValidateOnValueChanged"
+                            MinimumValue="0"
+                            MaximumDecimalPlaces="2"
+                            IsValid="{Binding IsInitialPriceValid}"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="Volatidade Média (%)" VerticalOptions="Center" Margin="0,0,0,10"/>
+                <Entry HorizontalOptions="Start" WidthRequest="160" Margin="0,0,0,10" Text="{Binding SigmaString}">
+                    <Entry.Behaviors>
+                        <toolkit:NumericValidationBehavior 
+                            Flags="ValidateOnValueChanged"
+                            MinimumValue="0.1"
+                            MaximumDecimalPlaces="2"
+                            IsValid="{Binding IsSigmaValid}"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="Retorno Médio (%)" VerticalOptions="Center" Margin="0,0,0,10"/>
+                <Entry HorizontalOptions="Start" WidthRequest="160" Margin="0,0,0,10" Text="{Binding MeanString}">
+                    <Entry.Behaviors>
+                        <toolkit:NumericValidationBehavior 
+                            Flags="ValidateOnValueChanged"
+                            MinimumValue="0.1"
+                            MaximumDecimalPlaces="2"
+                            IsValid="{Binding IsMeanValid}"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Label Text="Tempo (Dias)" VerticalOptions="Center" Margin="0,0,0,10"/>
+                <Entry HorizontalOptions="Start" WidthRequest="160" Margin="0,0,0,10" Text="{Binding NumDaysString}">
+                    <Entry.Behaviors>
+                        <toolkit:NumericValidationBehavior 
+                            Flags="ValidateOnValueChanged"
+                            MinimumValue="1"
+                            MaximumDecimalPlaces="0"
+                            IsValid="{Binding IsNumDaysValid}"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Button Text="Gerar Simulação" Margin="0,40,0,0" Command="{Binding BuildCommand}" IsEnabled="{Binding BuildEnabled}"/>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>
