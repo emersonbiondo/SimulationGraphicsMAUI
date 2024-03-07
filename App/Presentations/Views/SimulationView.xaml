@@ -82,7 +82,9 @@
                     </VerticalStackLayout>
                 </Frame>
             </Grid>
-            <AbsoluteLayout Grid.Column="1" x:Name="customView" Margin="40,0,0,0"/>
+            <Frame Grid.Column="1" Margin="40,0,0,0">
+                <AbsoluteLayout x:Name="customView" />
+            </Frame>
         </Grid>
     </ScrollView>
 </ContentPage>
