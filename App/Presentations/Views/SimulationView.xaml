@@ -3,61 +3,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:App.Presentations.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:control="clr-namespace:App.Presentations.Views.Control"
              x:DataType="vm:SimulationViewModel"
              x:Class="App.Presentations.Views.SimulationView"
              Title="Simulação Movimento Browniano">
-    <Grid Margin="40">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="220"/>
-        </Grid.ColumnDefinitions>
-        <VerticalStackLayout Grid.Column="0">
-
-        </VerticalStackLayout>
-        <Frame Grid.Column="1" WidthRequest="200" HeightRequest="460" Margin="20,0,0,0">
-            <VerticalStackLayout>
-                <Label Text="Preço Inicial" VerticalOptions="Center" Margin="0,0,0,10"/>
-                <Entry HorizontalOptions="Start" WidthRequest="160" Margin="0,0,0,10" Text="{Binding InitialPriceString}">
-                    <Entry.Behaviors>
-                        <toolkit:NumericValidationBehavior 
-                            Flags="ValidateOnValueChanged"
-                            MinimumValue="0"
-                            MaximumDecimalPlaces="2"
-                            IsValid="{Binding IsInitialPriceValid}"/>
-                    </Entry.Behaviors>
-                </Entry>
-                <Label Text="Volatidade Média (%)" VerticalOptions="Center" Margin="0,0,0,10"/>
-                <Entry HorizontalOptions="Start" WidthRequest="160" Margin="0,0,0,10" Text="{Binding SigmaString}">
-                    <Entry.Behaviors>
-                        <toolkit:NumericValidationBehavior 
-                            Flags="ValidateOnValueChanged"
-                            MinimumValue="0.1"
-                            MaximumDecimalPlaces="2"
-                            IsValid="{Binding IsSigmaValid}"/>
-                    </Entry.Behaviors>
-                </Entry>
-                <Label Text="Retorno Médio (%)" VerticalOptions="Center" Margin="0,0,0,10"/>
-                <Entry HorizontalOptions="Start" WidthRequest="160" Margin="0,0,0,10" Text="{Binding MeanString}">
-                    <Entry.Behaviors>
-                        <toolkit:NumericValidationBehavior 
-                            Flags="ValidateOnValueChanged"
-                            MinimumValue="0.1"
-                            MaximumDecimalPlaces="2"
-                            IsValid="{Binding IsMeanValid}"/>
-                    </Entry.Behaviors>
-                </Entry>
-                <Label Text="Tempo (Dias)" VerticalOptions="Center" Margin="0,0,0,10"/>
-                <Entry HorizontalOptions="Start" WidthRequest="160" Margin="0,0,0,10" Text="{Binding NumDaysString}">
-                    <Entry.Behaviors>
-                        <toolkit:NumericValidationBehavior 
-                            Flags="ValidateOnValueChanged"
-                            MinimumValue="1"
-                            MaximumDecimalPlaces="0"
-                            IsValid="{Binding IsNumDaysValid}"/>
-                    </Entry.Behaviors>
-                </Entry>
-                <Button Text="Gerar Simulação" Margin="0,40,0,0" Command="{Binding BuildCommand}" IsEnabled="{Binding BuildEnabled}"/>
-            </VerticalStackLayout>
-        </Frame>
-    </Grid>
+    <ScrollView>
+        <Grid Margin="40">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Frame Grid.Row="0" VerticalOptions="StartAndExpand" WidthRequest="220">
+                    <VerticalStackLayout>
+                        <Label Text="Preço Inicial" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Entry HorizontalOptions="Start" WidthRequest="180" Margin="0,0,0,10" Text="{Binding InitialPriceString}">
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior 
+                                    Flags="ValidateOnValueChanged"
+                                    MinimumValue="0"
+                                    MaximumDecimalPlaces="2"
+                                    IsValid="{Binding IsInitialPriceValid}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text="Volatidade Média (%)" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Entry HorizontalOptions="Start" WidthRequest="180" Margin="0,0,0,10" Text="{Binding SigmaString}">
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior 
+                                    Flags="ValidateOnValueChanged"
+                                    MinimumValue="0.1"
+                                    MaximumDecimalPlaces="2"
+                                    IsValid="{Binding IsSigmaValid}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text="Retorno Médio (%)" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Entry HorizontalOptions="Start" WidthRequest="180" Margin="0,0,0,10" Text="{Binding MeanString}">
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior 
+                                    Flags="ValidateOnValueChanged"
+                                    MinimumValue="0.1"
+                                    MaximumDecimalPlaces="2"
+                                    IsValid="{Binding IsMeanValid}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text="Tempo (Dias)" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Entry HorizontalOptions="Start" WidthRequest="180" Margin="0,0,0,10" Text="{Binding NumDaysString}">
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior 
+                                    Flags="ValidateOnValueChanged"
+                                    MinimumValue="1"
+                                    MaximumDecimalPlaces="0"
+                                    IsValid="{Binding IsNumDaysValid}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text="Largura Linha" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Slider Margin="0,0,0,10" Minimum="1" Maximum="10" Value="{Binding Simulation.StrokeSizeValue}"/>
+                        <Label Text="Cor Linha" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Picker Margin="0,0,0,10" ItemsSource="{Binding Simulation.ListColors}" SelectedItem="{Binding Simulation.Color}"/>
+                        <HorizontalStackLayout>
+                            <Button Text="Gerar" WidthRequest="80" Margin="0,40,0,0" Command="{Binding BuildCommand}" IsEnabled="{Binding BuildEnabled}"/>
+                            <Button Text="Limpar" WidthRequest="80" Margin="20,40,0,0" Command="{Binding ClearCommand}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame Grid.Row="1" WidthRequest="220" Margin="0,20,0,0">
+                    <VerticalStackLayout>
+                        <Label Text="Escala" VerticalOptions="Center"/>
+                        <Slider Margin="0,20,0,0" Minimum="0.1" Maximum="1" Value="{Binding ScaleValue}"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+            <AbsoluteLayout Grid.Column="1" x:Name="customView" Margin="40,0,0,0"/>
+        </Grid>
+    </ScrollView>
 </ContentPage>

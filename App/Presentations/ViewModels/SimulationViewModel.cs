@@ -1,7 +1,10 @@
 ﻿using App.Presentations.Models;
+using App.Presentations.Views.Control;
 using App.Utils;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Layouts;
 
 namespace App.Presentations.ViewModels
 {
@@ -10,6 +13,10 @@ namespace App.Presentations.ViewModels
         public static IAlertService AlertService;
 
         public Simulation Simulation { get; set; }
+
+        public AbsoluteLayout CustomView { get; set; }
+
+        public GraphicsView GraphicsView { get; set; }        
 
         public string InitialPriceString
         {
@@ -63,6 +70,24 @@ namespace App.Presentations.ViewModels
             }
         }
 
+        private float scaleValue = 1;
+
+        public float ScaleValue
+        {
+            get
+            {
+                return scaleValue;
+            }
+            set
+            {
+                SetProperty(ref scaleValue, value);
+                if (CustomView != null)
+                {
+                    CustomView.Scale = value;
+                }
+            }
+        }
+
         public bool IsInitialPriceValid { get; set; }
 
         public bool IsSigmaValid { get; set; }
@@ -87,10 +112,22 @@ namespace App.Presentations.ViewModels
 
             if (Validate())
             {
+                GraphicsView = new GraphicsView();
+                GraphicsView.Drawable = new BrownianMotionDrawing(Simulation.GenerateBrownianMotion(), Simulation.StrokeSizeValue, Simulation.Color);
+                AbsoluteLayout.SetLayoutBounds(GraphicsView, new Rect(0, 0, 1, 1));
+                AbsoluteLayout.SetLayoutFlags(GraphicsView, AbsoluteLayoutFlags.All);
+                CustomView.Add(GraphicsView);
+                ScaleValue = 1;
                 await Task.Delay(1000);
             }
 
             BuildEnabled = true;
+        }
+
+        [RelayCommand]
+        public async Task Clear()
+        {
+            CustomView.Clear();
         }
 
         public bool Validate()
