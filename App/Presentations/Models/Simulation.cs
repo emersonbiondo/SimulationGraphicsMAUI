@@ -12,6 +12,8 @@ namespace App.Presentations.Models
 
         public int NumDays { get; set; }
 
+        public int NumSimulations { get; set; }
+
         public float StrokeSizeValue { get; set; }
 
         public List<string> ListColors { get; set; }
@@ -24,6 +26,7 @@ namespace App.Presentations.Models
             Sigma = 20;
             Mean = 1;
             NumDays = 252;
+            NumSimulations = 1;
             StrokeSizeValue = 2;
             ListColors = new List<string>()
             {

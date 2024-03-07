@@ -88,6 +88,19 @@ namespace App.Presentations.ViewModels
             }
         }
 
+        public int NumSimulations
+        {
+            get
+            {
+                return Simulation.NumSimulations;
+            }
+            set
+            {
+                Simulation.NumSimulations = value;
+                OnPropertyChanged("NumSimulations");
+            }
+        }
+
         public bool IsInitialPriceValid { get; set; }
 
         public bool IsSigmaValid { get; set; }
@@ -112,13 +125,16 @@ namespace App.Presentations.ViewModels
 
             if (Validate())
             {
-                GraphicsView = new GraphicsView();
-                GraphicsView.Drawable = new BrownianMotionDrawing(Simulation.GenerateBrownianMotion(), Simulation.StrokeSizeValue, Simulation.Color);
-                AbsoluteLayout.SetLayoutBounds(GraphicsView, new Rect(0, 0, 1, 1));
-                AbsoluteLayout.SetLayoutFlags(GraphicsView, AbsoluteLayoutFlags.All);
-                CustomView.Add(GraphicsView);
                 ScaleValue = 1;
-                await Task.Delay(1000);
+                for (int i = 1; i <= Simulation.NumSimulations; i++)
+                {
+                    GraphicsView = new GraphicsView();
+                    GraphicsView.Drawable = new BrownianMotionDrawing(Simulation.GenerateBrownianMotion(), Simulation.StrokeSizeValue, Simulation.Color);
+                    AbsoluteLayout.SetLayoutBounds(GraphicsView, new Rect(0, 0, 1, 1));
+                    AbsoluteLayout.SetLayoutFlags(GraphicsView, AbsoluteLayoutFlags.All);
+                    CustomView.Add(GraphicsView);
+                    await Task.Delay(200);
+                }
             }
 
             BuildEnabled = true;

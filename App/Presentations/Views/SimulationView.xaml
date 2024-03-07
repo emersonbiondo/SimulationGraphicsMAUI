@@ -60,6 +60,11 @@
                                     IsValid="{Binding IsNumDaysValid}"/>
                             </Entry.Behaviors>
                         </Entry>
+                        <Label Text="Simulações" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <HorizontalStackLayout Margin="0,0,0,10">
+                            <Stepper Minimum="1" Maximum="10" Increment="1" Value="{Binding NumSimulations}"/>
+                            <Label Text="{Binding NumSimulations}" VerticalOptions="Center" Margin="10,0,0,0"/>
+                        </HorizontalStackLayout>
                         <Label Text="Largura Linha" VerticalOptions="Center" Margin="0,0,0,10"/>
                         <Slider Margin="0,0,0,10" Minimum="1" Maximum="10" Value="{Binding Simulation.StrokeSizeValue}"/>
                         <Label Text="Cor Linha" VerticalOptions="Center" Margin="0,0,0,10"/>
