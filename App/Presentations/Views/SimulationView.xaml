@@ -6,7 +6,7 @@
              xmlns:control="clr-namespace:App.Presentations.Views.Control"
              x:DataType="vm:SimulationViewModel"
              x:Class="App.Presentations.Views.SimulationView"
-             Title="Simulação Movimento Browniano">
+             Title="Simulation">
     <ScrollView>
         <Grid Margin="40">
             <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
                 </Grid.RowDefinitions>
                 <Frame Grid.Row="0" VerticalOptions="StartAndExpand" WidthRequest="220">
                     <VerticalStackLayout>
-                        <Label Text="Preço Inicial" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Label Text="Initial price" VerticalOptions="Center" Margin="0,0,0,10"/>
                         <Entry HorizontalOptions="Start" WidthRequest="180" Margin="0,0,0,10" Text="{Binding InitialPriceString}">
                             <Entry.Behaviors>
                                 <toolkit:NumericValidationBehavior 
@@ -30,7 +30,7 @@
                                     IsValid="{Binding IsInitialPriceValid}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Label Text="Volatidade Média (%)" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Label Text="Average Volatility (%)" VerticalOptions="Center" Margin="0,0,0,10"/>
                         <Entry HorizontalOptions="Start" WidthRequest="180" Margin="0,0,0,10" Text="{Binding SigmaString}">
                             <Entry.Behaviors>
                                 <toolkit:NumericValidationBehavior 
@@ -40,7 +40,7 @@
                                     IsValid="{Binding IsSigmaValid}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Label Text="Retorno Médio (%)" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Label Text="Average Return (%)" VerticalOptions="Center" Margin="0,0,0,10"/>
                         <Entry HorizontalOptions="Start" WidthRequest="180" Margin="0,0,0,10" Text="{Binding MeanString}">
                             <Entry.Behaviors>
                                 <toolkit:NumericValidationBehavior 
@@ -50,7 +50,7 @@
                                     IsValid="{Binding IsMeanValid}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Label Text="Tempo (Dias)" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Label Text="Time (Days)" VerticalOptions="Center" Margin="0,0,0,10"/>
                         <Entry HorizontalOptions="Start" WidthRequest="180" Margin="0,0,0,10" Text="{Binding NumDaysString}">
                             <Entry.Behaviors>
                                 <toolkit:NumericValidationBehavior 
@@ -60,24 +60,24 @@
                                     IsValid="{Binding IsNumDaysValid}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Label Text="Simulações" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Label Text="Simulations" VerticalOptions="Center" Margin="0,0,0,10"/>
                         <HorizontalStackLayout Margin="0,0,0,10">
                             <Stepper Minimum="1" Maximum="10" Increment="1" Value="{Binding NumSimulations}"/>
                             <Label Text="{Binding NumSimulations}" VerticalOptions="Center" Margin="10,0,0,0"/>
                         </HorizontalStackLayout>
-                        <Label Text="Largura Linha" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Label Text="Line Width" VerticalOptions="Center" Margin="0,0,0,10"/>
                         <Slider Margin="0,0,0,10" Minimum="1" Maximum="10" Value="{Binding Simulation.StrokeSizeValue}"/>
-                        <Label Text="Cor Linha" VerticalOptions="Center" Margin="0,0,0,10"/>
+                        <Label Text="Line Color" VerticalOptions="Center" Margin="0,0,0,10"/>
                         <Picker Margin="0,0,0,10" ItemsSource="{Binding Simulation.ListColors}" SelectedItem="{Binding Simulation.Color}"/>
                         <HorizontalStackLayout>
-                            <Button Text="Gerar" WidthRequest="80" Margin="0,40,0,0" Command="{Binding BuildCommand}" IsEnabled="{Binding BuildEnabled}"/>
-                            <Button Text="Limpar" WidthRequest="80" Margin="20,40,0,0" Command="{Binding ClearCommand}"/>
+                            <Button Text="Build" WidthRequest="80" Margin="0,40,0,0" Command="{Binding BuildCommand}" IsEnabled="{Binding BuildEnabled}"/>
+                            <Button Text="Clear" WidthRequest="80" Margin="20,40,0,0" Command="{Binding ClearCommand}"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Frame>
                 <Frame Grid.Row="1" WidthRequest="220" Margin="0,20,0,0">
                     <VerticalStackLayout>
-                        <Label Text="Escala" VerticalOptions="Center"/>
+                        <Label Text="Scale" VerticalOptions="Center"/>
                         <Slider Margin="0,20,0,0" Minimum="0.1" Maximum="1" Value="{Binding ScaleValue}"/>
                     </VerticalStackLayout>
                 </Frame>

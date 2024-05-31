@@ -152,27 +152,27 @@ namespace App.Presentations.ViewModels
 
             if (!IsInitialPriceValid)
             {
-                errors.Add("Preço Inicial tem que ser um numero válido maior que '0'");
+                errors.Add("Starting Price must be a valid number greater than '0'");
             }
 
             if (!IsSigmaValid)
             {
-                errors.Add("Volatidade Média (%) tem que ser um numero válido maior que '0.1%'");
+                errors.Add("Average Volatility (%) must be a valid number greater than '0.1%'");
             }
 
             if (!IsMeanValid)
             {
-                errors.Add("Retorno Médio (%) tem que ser um numero válido maior que '0.1%'");
+                errors.Add("Average Return (%) must be a valid number greater than '0.1%'");
             }
 
             if (!IsNumDaysValid)
             {
-                errors.Add("Tempo (Dias) tem que ser um numero válido maior que 1");
+                errors.Add("Time (Days) must be a valid number greater than 1");
             }
 
             if (errors.Count > 0)
             {
-                AlertService.ShowAlert("Validação de Parametros", string.Join(Environment.NewLine, errors));
+                AlertService.ShowAlert("Parameter Validation", string.Join(Environment.NewLine, errors));
                 return false;
             }
             else

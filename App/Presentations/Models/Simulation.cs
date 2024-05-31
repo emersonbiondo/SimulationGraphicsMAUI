@@ -30,13 +30,13 @@ namespace App.Presentations.Models
             StrokeSizeValue = 2;
             ListColors = new List<string>()
             {
-                "Amarelo",
-                "Azul",
-                "Laranja",
-                "Preto",
-                "Vermelho"
+                "Black",
+                "Blue",
+                "Orange",
+                "Red",
+                "Yellow"
             };
-            Color = "Preto";
+            Color = "Black";
         }
 
         public double[] GenerateBrownianMotion()

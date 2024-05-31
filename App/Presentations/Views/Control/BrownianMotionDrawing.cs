@@ -4,7 +4,7 @@ namespace App.Presentations.Views.Control
 {
     public class BrownianMotionDrawing : IDrawable
     {
-        public float scale { get; set; } = 1;
+        public float Scale { get; set; } = 1;
 
         public double[] BrownianMotion { get; set; }
 
@@ -23,19 +23,19 @@ namespace App.Presentations.Views.Control
         {
             switch (Color)
             {
-                case "Preto":
+                case "Black":
                     canvas.StrokeColor = Colors.Black;
                     break;
-                case "Vermelho":
+                case "Red":
                     canvas.StrokeColor = Colors.Red;
                     break;
-                case "Azul":
+                case "Blue":
                     canvas.StrokeColor = Colors.Blue;
                     break;
-                case "Amarelo":
+                case "Yellow":
                     canvas.StrokeColor = Colors.Yellow;
                     break;
-                case "Laranja":
+                case "Orange":
                     canvas.StrokeColor = Colors.Orange;
                     break;
                 default:
